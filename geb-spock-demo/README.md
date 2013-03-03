@@ -1,4 +1,4 @@
-o# Groovy web testing with Geb and Spock
+# Groovy web testing with Geb and Spock
 
 ## Facts
 * web testing framework for Groovy
