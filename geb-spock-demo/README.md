@@ -5,26 +5,27 @@
 * using Selenium WebDriver for browser automation
 * may be combinded with other testing frameworks like *Spock*, JUnit, TestNG 
 * Webseite: [gebhome], Manual: [gebmanual]
-* current version: 0.7.2 (0.9.0-RC-1 with support Spock 0.7 and Groovy 2.x)
+* current release version: 0.7.2; *release candidate: 0.9.0-RC-1 (support Spock 0.7 and Groovy 2.x)*
 
 ## Some Advantages
 * Uses Groovy and combines well with Spock full power of it, i.e. combined back- and frontend testing. For instance (true story):
-  * fill a registration form using Geb,
+  * Fill a registration form using Geb,
   * than use an IMAP library to check for the confimation mail,
   * than use Groovy's regex powers to parse the confirmation link
   * and than again use Geb to call that link.
-* provides page and module classes to abstract from page structurs
-* ... TODO
+* Provides page and module classes to abstract from page structurs.
+* May (and IMHO should) be combined with Spock.
+* ...
 
 ## Demonstation
 This demonstation project is using Maven and combines Geb with Spock.
 
 ### Maven Setup
 * Needed dependencies: [Groovy, Spock, Selenium and Geb](pom.xml#L268-L290)). Other dependencies are optional and provide some generally good mocking magic -- though are not *needed*.
-* [maven-compiler-plugin](pom.xml#L61-L86)) needs to be configured to use `groovy-eclipse-compiler` to compile `.groovy` classes.
-* [maven-surefire-plugin](pom.xml#L88-L99)) may be configured to regard `*Spec` classes as tests (not only `*Test*`).
-* [build-helper-maven-plugin](pom.xml#L101-L134)) may be used to name several test/source folders -- in this case for Java *and* Groovy tests/sources. Also helps IDE's to find the folders.
-* [maven-eclipse-plugin](pom.xml#L136-L153) may be used for better integration in Eclipse using `mvn eclipse:eclipse`.
+* [maven-compiler-plugin](pom.xml#L61-L86) *needs to be* configured to use `groovy-eclipse-compiler` to compile `.groovy` classes.
+* [maven-surefire-plugin](pom.xml#L88-L99) *may be* configured to regard `*Spec` classes as tests (not only `*Test*`).
+* [build-helper-maven-plugin](pom.xml#L101-L134) *may be* used to name several test/source folders -- in this case for Java *and* Groovy tests/sources. Also helps IDE's to find the folders.
+* [maven-eclipse-plugin](pom.xml#L136-L153) *may be* used for better integration in Eclipse using `mvn eclipse:eclipse`.
 
 ### Geb Configuration
 [GebConfig.groovy](src/test/resources/GebConfig.groovy) allows to configure several details of Geb's behaviour. There are other ways linke using the [pom.xml](pom.xml) etc. See [gebmanual] for more details.
@@ -43,9 +44,9 @@ The [GoogleStartPage](src/test/groovy/de/tarent/demo/pages/GoogleStartPage.groov
 ### Module Classes
 Modules are like Pages but reusable across differend Pages and/or on the same Page. The [GoogleResultsPage](src/test/groovy/de/tarent/demo/pages/GoogleResultsPage.groovy#L18-L25) uses them to define the structure of a Google result item.
 
-
 ### Filling Forms
-TODO
+Geb provides several convenience shortcuts to fill forms; as demonstrated [here](src/test/groovy/de/tarent/demo/GoogleSpec.groovy#L23).
 
 [gebhome]: http://www.gebish.org/ "Geb's homepage"
 [gebmanual]: http://www.gebish.org/manual/0.7.2/ "The Book of Geb"
+[spock]: http://spockframework.org/ "Spock homepage"
