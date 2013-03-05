@@ -17,7 +17,7 @@
 * May (and IMHO should) be combined with Spock.
 * ...
 
-## Demonstation
+## Demonstration
 This demonstation project is using Maven and combines Geb with Spock.
 
 ### Maven Setup
