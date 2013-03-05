@@ -18,7 +18,7 @@
 * ...
 
 ## Demonstration
-This demonstation project is using Maven and combines Geb with Spock.
+This demonstration project is using Maven and combines Geb with Spock.
 
 ### Maven Setup
 * Needed dependencies: [Groovy, Spock, Selenium and Geb](pom.xml#L270-L292). Other dependencies are optional and provide some generally good mocking magic -- though are not *needed*.
