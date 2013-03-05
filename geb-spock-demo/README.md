@@ -3,7 +3,7 @@
 ## Facts
 * web testing framework for Groovy
 * using Selenium WebDriver for browser automation
-* may be combinded with other testing frameworks like *Spock*, JUnit, TestNG 
+* may be combinded with other testing frameworks like *Spock* (see [spock]), JUnit, TestNG 
 * Webseite: [gebhome], Manual: [gebmanual]
 * current release version: 0.7.2; *release candidate: 0.9.0-RC-1 (support Spock 0.7 and Groovy 2.x)*
 
@@ -21,7 +21,7 @@
 This demonstation project is using Maven and combines Geb with Spock.
 
 ### Maven Setup
-* Needed dependencies: [Groovy, Spock, Selenium and Geb](pom.xml#L268-L290)). Other dependencies are optional and provide some generally good mocking magic -- though are not *needed*.
+* Needed dependencies: [Groovy, Spock, Selenium and Geb](pom.xml#L270-L292). Other dependencies are optional and provide some generally good mocking magic -- though are not *needed*.
 * [maven-compiler-plugin](pom.xml#L61-L86) *needs to be* configured to use `groovy-eclipse-compiler` to compile `.groovy` classes.
 * [maven-surefire-plugin](pom.xml#L88-L99) *may be* configured to regard `*Spec` classes as tests (not only `*Test*`).
 * [build-helper-maven-plugin](pom.xml#L101-L134) *may be* used to name several test/source folders -- in this case for Java *and* Groovy tests/sources. Also helps IDE's to find the folders.
