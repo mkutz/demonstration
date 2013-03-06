@@ -27,7 +27,7 @@ public class GoogleSpec extends GebReportingSpec {
     }
 
     @Unroll("searching for \"#somethingPopular[0..2]\" should suggest \"#somethingPopular\"")
-    def "searching for somthing popular should suggest it"() {
+    def "searching for something popular should suggest it"() {
         given:
         browser.to(GoogleStartPage)
 
