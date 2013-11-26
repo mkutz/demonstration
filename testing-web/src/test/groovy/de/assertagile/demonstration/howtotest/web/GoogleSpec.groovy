@@ -3,9 +3,18 @@ package de.assertagile.demonstration.howtotest.web
 import de.assertagile.demonstration.howtotest.web.pages.GoogleResultsPage
 import de.assertagile.demonstration.howtotest.web.pages.GoogleStartPage
 import geb.spock.GebReportingSpec
+import org.sikuli.basics.SikuliScript
+import org.sikuli.script.Region
+import org.sikuli.script.Screen
 import spock.lang.Unroll
 
 public class GoogleSpec extends GebReportingSpec {
+
+    Screen screen = new Screen()
+
+    def setup() {
+
+    }
 
     def "when calling google.de the user should be at the start page"() {
         when:
@@ -13,6 +22,10 @@ public class GoogleSpec extends GebReportingSpec {
 
         then:
         browser.at(GoogleStartPage)
+
+        and:
+        screen.find("src/test/resources/GoogleStartPage_QueryAndButtons.png").find("src/test/resources/GoogleStartPage_Query.png").type("testing google")
+
     }
 
     def "typing should take the user to the results page"() {

@@ -76,6 +76,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Sikuli: for visual testing -->
+        <dependency>
+            <groupId>org.sikuli</groupId>
+            <artifactId>sikuli-java</artifactId>
+            <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
