@@ -4,7 +4,7 @@
 
     <groupId>de.assertagile.demonstration</groupId>
     <artifactId>testing-mail</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>pom</packaging>
 
     <licenses>
@@ -36,6 +36,7 @@
         <module>implementation</module>
         <module>mockjavamail</module>
         <module>greenmail</module>
+        <module>javamailmock2</module>
     </modules>
 
     <dependencies>
