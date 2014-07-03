@@ -4,12 +4,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 
-/**
- * Created by mkutz on 02.07.14.
- */
 public class UserServiceClient {
 
     private HttpClient httpClient = new HttpClient();
