@@ -4,64 +4,88 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.tarent.demo</groupId>
+    <groupId>de.assertagile.demonstration</groupId>
     <artifactId>geb-spock</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>Demo project for awesome features of Geb and Spock.</description>
 
-    <scm>
-        <developerConnection>scm:svn:svn+ssh://</developerConnection>
-        <connection>scm:svn:svn+ssh://</connection>
-    </scm>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>mkutz</id>
+            <name>Michael Kutz</name>
+            <email>mail@assertagile.de</email>
+            <timezone>+1</timezone>
+            <roles>
+                <role>developer</role>
+                <role>tester</role>
+            </roles>
+        </developer>
+    </developers>
 
     <properties>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <java.version>1.7</java.version>
-
-        <cglib.version>2.2.2</cglib.version>
-        <groovy.version>2.1.6</groovy.version>
-        <groovy.eclipse.compiler.version>2.7.0-01</groovy.eclipse.compiler.version>
-        <objenesis.version>1.3</objenesis.version>
-        <spock.version>0.7-groovy-2.0</spock.version>
-        <geb.version>0.9.1</geb.version>
-        <selenium.version>2.39.0</selenium.version>
-        <slf4j.version>1.6.1</slf4j.version>
-        <javax.mail.version>1.4.5</javax.mail.version>
-        <joda-time.version>2.1</joda-time.version>
-        <mysql.version>5.1.21</mysql.version>
-        <eclipselink.version>2.4.0</eclipselink.version>
-        <hibernate.version>4.1.9.Final</hibernate.version>
-        <hibernate.jpa.api.version>1.0.1.Final</hibernate.jpa.api.version>
-        <querydsl.version>2.7.3</querydsl.version>
-        <commons-io.version>2.4</commons-io.version>
-        <jsch.version>0.1.49</jsch.version>
-        <h2.version>1.3.168</h2.version>
-        <groovy-eclipse-batch.version>1.8.6-01</groovy-eclipse-batch.version>
-        <commons-configuration.version>1.9</commons-configuration.version>
-
-        <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-        <maven-compiler-plugin.version>2.5.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.14</maven-surefire-plugin.version>
     </properties>
+
+    <dependencies>
+
+        <!-- SLF4J: Standard logging interface and log4j-bridge -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.10</version>
+        </dependency>
+        <dependency>HtmlUnitDriver(true)
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.10</version>
+        </dependency>
+
+        <!-- Groovy and Spock framework: needed for testing -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>0.7-groovy-2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Geb and Selenium: needed for browser automation in tests -->
+        <dependency>
+            <groupId>org.gebish</groupId>
+            <artifactId>geb-spock</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.44.0</version>
+        </dependency>
+
+    </dependencies>
 
     <build>
 
         <plugins>
 
-            <!-- Release plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.3.2</version>
-            </plugin>
-
             <!-- Configure the compiler plugin for Groovy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>3.2</version>
                 <extensions>true</extensions>
                 <configuration>
                     <compilerId>groovy-eclipse-compiler</compilerId>
@@ -74,7 +98,12 @@
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>${groovy.eclipse.compiler.version}</version>
+                        <version>2.9.1-01</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>2.3.7-01</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -83,20 +112,45 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
+                <version>2.18.1</version>
                 <configuration>
                     <includes>
-                        <include>**/*Spec.java</include>
-                        <include>**/*Test.java</include>
+                        <include>**/*Spec.*</include>
+                        <include>**/*Test.*</include>
                     </includes>
+                    <excludes>
+                        <exclude>**/UiSpec.*</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
+
+            <!-- Failsafe: will execute system tests (*UiSpec) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <skipTests>false</skipTests>
+                    <includes>
+                        <include>**/*UiSpec.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 
             <!-- Build Helper: will add Groovy sources to path -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>${build-helper-maven-plugin.version}</version>
+                <version>1.9.1</version>
                 <executions>
                     <execution>
                         <id>add-source</id>
@@ -150,7 +204,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
+                <version>2.4</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -165,80 +219,5 @@
         </plugins>
 
     </build>
-
-    <dependencies>
-
-        <!-- LOGGING -->
-
-        <!-- SLF4J: Standard logging interface and log4j-bridge -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <!-- MISC -->
-
-        <!-- Joda Time: For time definition/representation -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-        </dependency>
-
-        <!-- IOUtils: for close quietly -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
-        </dependency>
-
-        <!-- TESTING -->
-
-        <!-- Groovy and Spock framework: needed for testing -->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>${groovy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <version>${spock.version}</version>
-        </dependency>
-
-        <!-- Geb and Selenium: needed for browser automation in tests -->
-        <dependency>
-            <groupId>org.gebish</groupId>
-            <artifactId>geb-spock</artifactId>
-            <version>${geb.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-
-        <!-- CGLib: needed to mock concrete classes within Spock -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-            <version>${cglib.version}</version>
-        </dependency>
-
-        <!-- OpenJenisis: Needed to mock classes without a constructor within Spock -->
-        <dependency>
-            <groupId>org.objenesis</groupId>
-            <artifactId>objenesis</artifactId>
-            <version>${objenesis.version}</version>
-        </dependency>
-
-    </dependencies>
-
 </project>
 
