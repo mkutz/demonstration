@@ -1,9 +1,9 @@
-package de.tarent.demo
+package de.assertagile.demonstration
 
 import spock.lang.Unroll
 import geb.spock.GebReportingSpec
-import de.tarent.demo.pages.GoogleResultsPage
-import de.tarent.demo.pages.GoogleStartPage
+import de.assertagile.demonstration.pages.GoogleResultsPage
+import de.assertagile.demonstration.pages.GoogleStartPage
 
 public class GoogleSpec extends GebReportingSpec {
 
@@ -29,17 +29,17 @@ public class GoogleSpec extends GebReportingSpec {
     @Unroll("searching for \"#somethingPopular[0..2]\" should suggest \"#somethingPopular\"")
     def "searching for something popular should suggest it"() {
         given:
-        browser.to(GoogleStartPage)
+        GoogleStartPage startPage = browser.to(GoogleStartPage)
 
         when:
-        browser.page.queryInput = somethingPopular[0..2]
+        startPage.queryInput = somethingPopular[0..2]
 
         then:
-        browser.at(GoogleResultsPage)
+        GoogleResultsPage resultsPage = browser.at(GoogleResultsPage)
 
         and:
-        browser.page.suggestions[0].text == somethingPopular
-        browser.page.suggestions[0].supplement == somethingPopular[3..-1]
+        resultsPage.suggestions[0].text == somethingPopular
+        resultsPage.suggestions[0].supplement == somethingPopular[3..-1]
 
         where:
         somethingPopular << [

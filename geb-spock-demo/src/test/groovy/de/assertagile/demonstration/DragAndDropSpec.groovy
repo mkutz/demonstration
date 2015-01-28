@@ -1,8 +1,8 @@
-package de.tarent.demo
+package de.assertagile.demonstration
 
 import spock.lang.Ignore
 import geb.spock.GebReportingSpec
-import de.tarent.demo.pages.W3SchoolsDragAndDropPage
+import de.assertagile.demonstration.pages.W3SchoolsDragAndDropPage
 
 class DragAndDropSpec extends GebReportingSpec {
 

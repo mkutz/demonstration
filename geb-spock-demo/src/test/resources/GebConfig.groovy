@@ -1,4 +1,7 @@
 import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.htmlunit.HtmlUnitDriver
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.remote.RemoteWebDriver
 
 /*
  * Configuration script for Geb tests. Configuration values might be overwritten using system properties or may be
@@ -21,6 +24,25 @@ waiting {
     retryInterval = 0.5
 }
 
+seleniumUrl = "http://10.86.2.36:4444/wd/hub"
+
 /* use this driver for testing */
 driver = { new FirefoxDriver() }
-//driver = { new HtmlUnitDriver(true) }
+
+environments {
+    'firefox' {
+        driver = {
+            new RemoteWebDriver(new URL("http://10.86.2.36:4444/wd/hub"), DesiredCapabilities.firefox())
+        }
+    }
+    'internet-explorer' {
+        driver = {
+            new RemoteWebDriver(new URL("http://10.86.2.36:4444/wd/hub"), DesiredCapabilities.internetExplorer())
+        }
+    }
+    'chrome' {
+        driver = {
+            new RemoteWebDriver(new URL("http://10.86.2.36:4444/wd/hub"), DesiredCapabilities.chrome())
+        }
+    }
+}

@@ -1,4 +1,4 @@
-package de.tarent.demo.pages
+package de.assertagile.demonstration.pages
 
 import geb.Module
 import geb.Page
