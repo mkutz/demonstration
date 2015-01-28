@@ -32,8 +32,9 @@ class MockingDemoSpec extends Specification {
         String expectedString = "abc"
 
         and:
-        Object objectMock = Mock()
-        objectMock.toString() >> expectedString
+        Object objectMock = Mock() {
+            toString() >> expectedString
+        }
 
         when:
         String string = "${objectMock}"
@@ -46,5 +47,42 @@ class MockingDemoSpec extends Specification {
     }
 
 
-    // TODO argument matching
+    def "argument matching"() {
+        given:
+        String expectedArgument = "abc"
+
+        and:
+        List<String> listMock = Mock()
+
+        when:
+        listMock.contains(expectedArgument)
+
+        then:
+        1 * listMock.contains(expectedArgument)
+    }
+
+    def "complex argument matching"() {
+        given:
+        Map<String, Object> mapMock = Mock()
+
+        when:
+        mapMock.put("bla", ["a", "b", "c"])
+
+        then:
+        1 * mapMock.put(_, { it[1] == "b" })
+    }
+
+    def "get complex arguments for closer inspection"() {
+        given:
+        List<String> extractedArgument = null
+        Map<String, Object> mapMock = Mock()
+
+        when:
+        mapMock.put("bla", ["a", "b", "c"])
+
+        then:
+        1 * mapMock.put(_ as String, { List<Map> it -> extractedArgument = it })
+        extractedArgument.contains("c")
+        extractedArgument.size() == 3 // => better assertion feedback
+    }
 }
