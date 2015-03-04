@@ -44,8 +44,6 @@
     </dependencies>
 
     <build>
-        <testSourceDirectory>src/test/groovy</testSourceDirectory>
-
         <pluginManagement>
             <plugins>
 
@@ -74,6 +72,41 @@
                             <version>2.3.7-01</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+
+                <!-- Build Helper: will add Groovy sources to path -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.9.1</version>
+                    <executions>
+                        <execution>
+                            <id>add-source</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>add-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>${basedir}/src/main/java</source>
+                                    <source>${basedir}/src/main/groovy</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>add-test-source</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>add-test-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>${basedir}/src/test/groovy</source>
+                                    <source>${basedir}/src/test/java</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
 
             </plugins>
