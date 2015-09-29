@@ -47,17 +47,19 @@ waiting {
 
     includeCauseInMessage = true // prevent surefire/failsafe from only showing WaitTimeoutException but the cause
 }
-
+driver
 
 /*
  * set system property for path to PhantomJS binary (currently not added by the maven plugin
  * see https://github.com/klieber/phantomjs-maven-plugin/issues/39
  */
-System.setProperty('phantomjs.binary.path', phantomJsPath[Platform.current])
 
 /* use this driver for testing */
 driver = {
-    new PhantomJSDriver()
+    System.setProperty('phantomjs.binary.path', phantomJsPath[Platform.current])
+    driver = {
+        new PhantomJSDriver()
+    }
 }
 
 environments {
@@ -67,12 +69,13 @@ environments {
         }
     }
     'chrome' {
-        System.setProperty('webdriver.chrome.driver', '/Users/tomaslin/drivers/chromedriver')
+        System.setProperty('webdriver.chrome.driver', '/usr/bin/chromedriver')
         driver = {
             new ChromeDriver()
         }
     }
     'phantomjs' {
+        System.setProperty('phantomjs.binary.path', phantomJsPath[Platform.current])
         driver = {
             new PhantomJSDriver()
         }

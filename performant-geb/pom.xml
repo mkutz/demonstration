@@ -55,7 +55,6 @@
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>2.3.11</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
@@ -77,6 +76,16 @@
             <version>2.47.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>2.47.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>2.47.2</version>
+        </dependency>
 
         <!-- PhantomJS: for headless browser tests -->
         <dependency>
@@ -84,6 +93,13 @@
             <artifactId>phantomjsdriver</artifactId>
             <version>1.2.0</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Scoped testing -->
+        <dependency>
+            <groupId>de.assertagile.spockframework.extensions</groupId>
+            <artifactId>spock-scope-extension</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
@@ -158,21 +174,6 @@
             </plugin>
 
             <!-- PhantomJS: will install PhantomJS headless browser -->
-            <plugin>
-                <groupId>com.github.klieber</groupId>
-                <artifactId>phantomjs-maven-plugin</artifactId>
-                <version>0.7</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <version>${phantomjs.version}</version>
-                </configuration>
-            </plugin>
 
 
             <!-- Build Helper: will add Groovy sources to path -->

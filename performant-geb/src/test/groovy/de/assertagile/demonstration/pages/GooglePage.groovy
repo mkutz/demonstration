@@ -17,5 +17,7 @@ class GooglePage extends Page {
         logoBy { $(By.id("hplogo")) }
 
         logoCssCached(cache: true) { $("#hplogo") }
+
+        searchInput { $("#lst-ib") }
     }
 }
