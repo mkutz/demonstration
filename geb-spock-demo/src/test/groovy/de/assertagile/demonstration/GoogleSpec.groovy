@@ -17,10 +17,10 @@ public class GoogleSpec extends GebReportingSpec {
 
     def "typing should take the user to the results page"() {
         given:
-        browser.to(GoogleStartPage)
+        GoogleStartPage startPage = browser.to(GoogleStartPage)
 
         when:
-        browser.page.queryInput = "a"
+        startPage.queryInput = "a"
 
         then:
         browser.at(GoogleResultsPage)
@@ -38,7 +38,7 @@ public class GoogleSpec extends GebReportingSpec {
         GoogleResultsPage resultsPage = browser.at(GoogleResultsPage)
 
         and:
-        resultsPage.suggestions[0].text == somethingPopular
+        resultsPage.suggestions[0].fullText == somethingPopular
         resultsPage.suggestions[0].supplement == somethingPopular[3..-1]
 
         where:
@@ -51,16 +51,16 @@ public class GoogleSpec extends GebReportingSpec {
 
     def "searching for \"ama\" should suggest \"amazon\" and return amazon.de as top result"() {
         given:
-        browser.to(GoogleStartPage)
+        GoogleStartPage startPage = browser.to(GoogleStartPage)
 
         when:
-        browser.page.queryInput = "ama"
+        startPage.queryInput = "ama"
 
         then:
-        browser.at(GoogleResultsPage)
+        GoogleResultsPage resultsPage = browser.at(GoogleResultsPage)
 
         and:
-        browser.page.resultListItems[0].title.contains("Amazon.de")
-        browser.page.resultListItems[0].href.contains("amazon.de")
+        resultsPage.resultListItems[0].title.contains("Amazon.de")
+        resultsPage.resultListItems[0].href.contains("amazon.de")
     }
 }

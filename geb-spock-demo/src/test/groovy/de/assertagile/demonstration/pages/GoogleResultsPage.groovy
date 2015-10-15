@@ -5,29 +5,29 @@ import geb.Page
 
 class GoogleResultsPage extends Page {
 
-    static at = { $("div#gbqfw") }
+    static at = { $("a#logo") }
 
     static content = {
         queryInput { $("input#gbqfq") }
         resultList(wait: true) { $("ol#rso") }
-        resultListItems(wait: true) { moduleList GoogleResultItem, $("ol#rso li") }
-        suggestions(wait: true) { moduleList GoogleSearchSuggestion, $("table.gssb_m") }
+        resultListItems(wait: true) { $("ol#rso div.g").collect { it.module(GoogleResultItem) } }
+        suggestions(wait: true) { $("ul.sbsb_b").collect { it.module(GoogleSearchSuggestion) } }
     }
 }
 
 class GoogleResultItem extends Module {
 
     static content = {
-        title { $("h3.r a.l").text() }
-        href { $("h3.r a.l").@href }
-        description(required: false) { $("span.st") }
+        title { $("h3.r").text() }
+        href { $("cite._Rm").text() }
+        description(required: false) { $("div.s") }
     }
 }
 
 class GoogleSearchSuggestion extends Module {
 
     static content = {
-        text { $("span").text() }
-        supplement { $("span b").text() }
+        fullText { $("div.sbqs_c").text() }
+        supplement { $("div.sbqs_c b").text() }
     }
 }

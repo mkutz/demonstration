@@ -9,6 +9,6 @@ class GoogleStartPage extends Page {
     static at = { $("div#lga") }
 
     static content = {
-        queryInput { $("input#gbqfq") }
+        queryInput { $("input#lst-ib") }
     }
 }
