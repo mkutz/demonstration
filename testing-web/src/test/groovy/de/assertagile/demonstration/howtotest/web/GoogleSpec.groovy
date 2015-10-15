@@ -9,37 +9,37 @@ public class GoogleSpec extends GebReportingSpec {
 
     def "when calling google.de the user should be at the start page"() {
         when:
-        browser.to(GoogleStartPage)
+        to GoogleStartPage
 
         then:
-        browser.at(GoogleStartPage)
+        at GoogleStartPage
     }
 
     def "typing should take the user to the results page"() {
         given:
-        browser.to(GoogleStartPage)
+        GoogleStartPage startPage = to GoogleStartPage
 
         when:
-        browser.page.queryInput = "a"
+        startPage.queryInput = "a"
 
         then:
-        browser.at(GoogleResultsPage)
+        at GoogleResultsPage
     }
 
     @Unroll("searching for \"#somethingPopular[0..2]\" should suggest \"#somethingPopular\"")
     def "searching for something popular should suggest it"() {
         given:
-        browser.to(GoogleStartPage)
+        GoogleStartPage startPage = to GoogleStartPage
 
         when:
-        browser.page.queryInput = somethingPopular[0..2]
+        startPage.queryInput = somethingPopular[0..2]
 
         then:
-        browser.at(GoogleResultsPage)
+        GoogleResultsPage resultsPage = at GoogleResultsPage
 
         and:
-        browser.page.suggestions[0].text == somethingPopular
-        browser.page.suggestions[0].supplement == somethingPopular[3..-1]
+        resultsPage.suggestions[0].fullText == somethingPopular
+        resultsPage.suggestions[0].supplement == somethingPopular[3..-1]
 
         where:
         somethingPopular << [
@@ -51,16 +51,16 @@ public class GoogleSpec extends GebReportingSpec {
 
     def "searching for \"ama\" should suggest \"amazon\" and return amazon.de as top result"() {
         given:
-        browser.to(GoogleStartPage)
+        GoogleStartPage startPage = to GoogleStartPage
 
         when:
-        browser.page.queryInput = "ama"
+        startPage.queryInput = "ama"
 
         then:
-        browser.at(GoogleResultsPage)
+        GoogleResultsPage resultsPage = at GoogleResultsPage
 
         and:
-        browser.page.resultListItems[0].title.contains("Amazon.de")
-        browser.page.resultListItems[0].href.contains("amazon.de")
+        resultsPage.resultListItems[0].title.contains("Amazon.de")
+        resultsPage.resultListItems[0].href.contains("amazon.de")
     }
 }
