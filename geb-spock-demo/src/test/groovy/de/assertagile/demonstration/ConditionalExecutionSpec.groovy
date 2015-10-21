@@ -35,7 +35,7 @@ class LocalCondition extends Closure<Boolean> {
     LocalCondition(Object owner, Object thisObject) { super(owner, thisObject) }
 
     Boolean call() {
-        new ConfigurationLoader().conf.getBaseUrl().startsWith(prefix)
+        new ConfigurationLoader().conf.getBaseUrl()?.startsWith(prefix)
     }
 }
 
@@ -46,6 +46,6 @@ class PreProdCondition extends Closure<Boolean> {
     PreProdCondition(Object owner, Object thisObject) { super(owner, thisObject) }
 
     Boolean call() {
-        new ConfigurationLoader().conf.getBaseUrl().startsWith(prefix)
+        new ConfigurationLoader().conf.getBaseUrl()?.startsWith(prefix)
     }
 }
