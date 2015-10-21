@@ -1,8 +1,4 @@
 import org.openqa.selenium.firefox.FirefoxDriver
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
-import org.openqa.selenium.remote.DesiredCapabilities
-import org.openqa.selenium.remote.RemoteWebDriver
-
 /*
  * Configuration script for Geb tests. Configuration values might be overwritten using system properties or may be
  * during runtime in Groovy code.
@@ -24,25 +20,18 @@ waiting {
     retryInterval = 0.5
 }
 
+baseUrl = "http://localhost"
+
 seleniumUrl = "http://10.86.2.36:4444/wd/hub"
 
 /* use this driver for testing */
 driver = { new FirefoxDriver() }
 
 environments {
-    'firefox' {
-        driver = {
-            new RemoteWebDriver(new URL("http://10.86.2.36:4444/wd/hub"), DesiredCapabilities.firefox())
-        }
+    'local' {
+        baseUrl = "http://localhost/"
     }
-    'internet-explorer' {
-        driver = {
-            new RemoteWebDriver(new URL("http://10.86.2.36:4444/wd/hub"), DesiredCapabilities.internetExplorer())
-        }
-    }
-    'chrome' {
-        driver = {
-            new RemoteWebDriver(new URL("http://10.86.2.36:4444/wd/hub"), DesiredCapabilities.chrome())
-        }
+    'pre-prod' {
+        baseUrl = "http://preprod.myapp.com/"
     }
 }
