@@ -22,8 +22,6 @@ waiting {
 
 baseUrl = "http://localhost"
 
-seleniumUrl = "http://10.86.2.36:4444/wd/hub"
-
 /* use this driver for testing */
 driver = { new FirefoxDriver() }
 
