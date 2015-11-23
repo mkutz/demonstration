@@ -1,16 +1,17 @@
 package de.assertagile.demonstration
 
+import geb.Configuration
 import geb.spock.GebReportingSpec
 
-class MyBaseGebSpec extends GebReportingSpec {
+abstract class MyBaseGebSpec extends GebReportingSpec {
 
+    @Override
     protected ExtendedGebConfiguration getConfig() {
         new ExtendedGebConfiguration(createConf())
     }
 
     @Override
-    ExtendedGebConfiguration createConf() {
-        return new ExtendedGebConfigurationLoader(gebConfEnv, System.properties, new GroovyClassLoader(getClass().classLoader)).getConf(gebConfScript)
+    Configuration createConf() {
+        new ExtendedGebConfigurationLoader(gebConfEnv, System.properties, new GroovyClassLoader(getClass().classLoader)).getConf(gebConfScript)
     }
-
 }
