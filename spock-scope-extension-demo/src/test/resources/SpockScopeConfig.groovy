@@ -1,3 +1,0 @@
-scopes =
-
-currentScopes = ["feature c"]
