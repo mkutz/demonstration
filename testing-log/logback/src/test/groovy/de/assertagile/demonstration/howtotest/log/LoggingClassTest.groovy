@@ -21,7 +21,7 @@ class LoggingClassTest extends Specification {
         root.addAppender(appenderMock)
     }
 
-    void "logging class should log"() {
+    void "log verification via appenderMock should work"() {
         given:
         LoggingEvent event = null
 
@@ -33,7 +33,7 @@ class LoggingClassTest extends Specification {
         event.level == Level.DEBUG
     }
 
-    void "teo"() {
+    void "log events should be added to the loggingEvents list"() {
         when:
         new LoggingClass()
 
